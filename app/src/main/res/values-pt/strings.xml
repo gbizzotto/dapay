@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DaPay (beta)</string>
+
+    <string name="cry">BTC</string>
+    <string name="exchange_rate">Câmbio</string>
+    <string name="unknown_exchange_rate">Sem cotação no momento.</string>
+    <string name="not_available">N/A</string>
+    <string name="fiat_hint">0,00</string>
+    <string name="label_optional">Identificador (opcional)</string>
+    <string name="confirm">Confirmar</string>
+    <string name="balance">Saldo</string>
+    <string name="profile">Perfil</string>
+    <string name="cancelled">Cancelado</string>
+    <string name="fraud">Fraude</string>
+    <string name="market">Mercado (pressionar para abrir no navegador)</string>
+
+    <string name="menu_logout">Trocar perfil</string>
+        <string name="menu_open_exchange">Acessar conta pelo site</string>
+
+    <string name="title_activity_login">Entrar</string>
+    <string name="title_bill">Consulta</string>
+    <string name="title_create_account">Criar conta</string>
+    <string name="title_create_profile">Criar senha DaPay</string>
+    <string name="title_select_profile">Selecione o perfil</string>
+    <string name="title_new_bill">Nova cobrança</string>
+
+    <string name="wait_connecting">Conectando</string>
+    <string name="wait_creating_profile">Criando perfil</string>
+    <string name="wait_logging_in">Entrando</string>
+
+    <string name="prompt_no_profile">Nenhum perfil</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_login">Entrar</string>
+    <string name="prompt_preferences">Preferências do perfil</string>
+    <string name="prompt_password">Senha</string>
+    <string name="prompt_confirm_password">Confirmar senha</string>
+    <string name="prompt_2fa">Código de confirmação</string>
+    <string name="prompt_profile_name">Nome do perfil</string>
+    <string name="prompt_action">O que fazer com os bitcoins?</string>
+    <string name="prompt_create_profile">Criar perfil</string>
+    <string name="prompt_remove">Remover</string>
+
+    <string name="action_presell">PRESELL.\nVender antes de cobrar, para garantir o valor em reais. Selecione esta opção se não confiar na volatilidade do bitcoin.</string>
+    <string name="action_take">TAKE.\nVender após o recebimento. Selecione esta opção se achar que o bitcoin pode cair num futuro próximo.</string>
+    <string name="action_make">MAKE.\nOferecer o bitcoin a venda na bolsa. Certas bolsas cobram taxas menores para a conversão. Selecione esta opção se achar que o valor do bitcoin vai se manter estável.</string>
+    <string name="action_hold">HOLD.\nNão converter para reais. Selecione esta opção se pretende gastar os bitcoins ou se achar que o valor do bitcoin vai subir.</string>
+
+    <string name="action_sign_in">Entrar</string>
+    <string name="action_sign_in_short">Entrar</string>
+    <string name="action_pay_short">Cobrar</string>
+    <string name="action_button_create_profile">Criar</string>
+    <string name="action_button_cancel_bill">Cancelar conta</string>
+    <string name="action_button_bill_received_owed">Receber o devido</string>
+    <string name="action_button_bill_new_account">Nova conta</string>
+    <string name="action_button_bill_show_qrcode">Mostrar QRCode</string>
+
+    <string name="notification_fraud_detection">Detecção de fraude</string>
+    <string name="notification_double_spend_attack">Ataque Double spent, valor não recebido</string>
+    <string name="notification_insufficient_payment">Valor sendo recebido insuficiente</string>
+
+    <string name="warning_insufficient_crypto">Saldo de bitcoin insuficiente para converter para reais de antemão. O valor será convertido após o recebimento.</string>
+    <string name="warning_unknown_balance">Saldo de bitcoin desconhecido. O recebido será convertido após o recebimento.</string>
+    <string name="warning_unknown_price">Sem cotação no momento. O recebido será convertido após o recebimento.</string>
+
+    <string name="error_invalid_email">Email inválido</string>
+    <string name="error_invalid_password">Senha muito curta</string>
+    <string name="error_passwords_dont_match">Senhas não batem</string>
+    <string name="error_incorrect_password">Login ou senha incorretos</string>
+    <string name="error_no_connectivity">Sem conexão ao servidor</string>
+    <string name="error_no_response">Sem resposta do servidor</string>
+    <string name="error_needs_2fa">Código de confirmação</string>
+    <string name="error_incorrect_2fa">Código inválido</string>
+    <string name="error_unauthorized">Não autorizado</string>
+    <string name="error_create_deposit">Erro ao criar depósito</string>
+    <string name="error_field_required">Campo obrigatório</string>
+    <string name="error_insufficient_funds">Saldo insuficiente</string>
+    <string name="error_no_buyers">Não há compradores\nNão é possível calcular o valor em bitcoins</string>
+    <string name="error_not_enough_buyers">Não há compradores o suficiente\nO valor foi parcialmente convertido para reais</string>
+    <string name="error_during_conversion">Erro ao converter bitcoins por reais</string>
+    <string name="error_unknown">Erro inesperado</string>
+    <string name="error_internal_1">Erro interno 1</string>
+    <string name="error_no_browser">Nenhuma aplicação pode abrir este link. Por favor instale um navegador.</string>
+
+    <string name="label_bill_cry">Conta (BTC)</string>
+    <string name="label_bill_fiat">Conta ($)</string>
+    <string name="label_bill_receiving">Recebendo</string>
+    <string name="label_bill_received">Recebido</string>
+    <string name="label_bill_owed">Devido</string>
+    <string name="label_bill_payments">Pagamentos recebidos</string>
+
+    <string name="label_login">Você possui uma conta no mercado selecionado. Faça login. No próximo passo poderá criar uma senha de acesso para acessar sua conta somente por este aparelho e com permissões limitadas, de maneira a proteger seus dados e fundos.</string>
+    <string name="label_create_account_help">Crie uma conta no mercado selecionado.</string>
+    <string name="label_create_profile_help">Crie um perfil de acesso à sua conta no mercado selecionado. Será acessível apenas por este aparelho.</string>
+    <string name="label_select_market_help">Selecione o mercado\nonde criar uma conta e um perfil</string>
+
+</resources>

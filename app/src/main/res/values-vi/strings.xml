@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">DaPay (beta)</string>
+
+    <string name="cry">BTC</string>
+    <string name="exchange_rate">Tỉ giá</string>
+    <string name="unknown_exchange_rate">Không có tỉ giá</string>
+    <string name="not_available">Không có</string>
+    <string name="fiat_hint">0.0</string>
+    <string name="label_optional">Nhãn (không bắt buộc)</string>
+    <string name="confirm">Xác nhận</string>
+    <string name="balance">Số dư</string>
+    <string name="profile">Hồ sơ</string>
+    <string name="cancelled">Hủy</string>
+    <string name="fraud">Lừa đảo</string>
+    <string name="market">Thị trường (chạm vào để mở trên trình duyệt)</string>
+
+    <string name="menu_logout">Đổi hô sơ</string>
+    <string name="menu_open_exchange">Mở trang web sàn giao dịch</string>
+
+    <string name="title_activity_login">Đăng nhập</string>
+    <string name="title_bill">Hóa đơn</string>
+    <string name="title_create_account">Tạo tài khoản</string>
+    <string name="title_create_profile">Tạo mật khẩu DaPay</string>
+    <string name="title_select_profile">Chọn hô sơ</string>
+    <string name="title_new_bill">Hóa đơn mới</string>
+
+    <string name="wait_connecting">Đang kết nối</string>
+    <string name="wait_creating_profile">Đang tạo hồ sơ</string>
+    <string name="wait_logging_in">Đang đăng nhập</string>
+
+    <string name="prompt_no_profile">Không có hồ sơ</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_login">Đăng nhập</string>
+    <string name="prompt_preferences">Tùy chỉnh hồ sơ</string>
+    <string name="prompt_password">Mật khẩu</string>
+    <string name="prompt_confirm_password">Xác nhận mật khẩu</string>
+    <string name="prompt_2fa">Mã xác nhận</string>
+    <string name="prompt_profile_name">Tên hồ sơ</string>
+    <string name="prompt_action">Làm gì với số bitcoin của hóa đơn?</string>
+    <string name="prompt_create_profile">Tạo hồ sơ</string>
+    <string name="prompt_remove">Xóa</string>
+
+    <string name="action_presell">BÁN KHỐNG.\nBán bitcoin ra tiền mặt trước khi thu tiền để tránh biến động giá Bitcoin.</string>
+    <string name="action_take">NHẬN.\n Bán sau khi nhận được bitcoin để tránh Bitcoin có khả năng mất giá.</string>
+    <string name="action_make">TẠO.\nTạo một lệnh bán bitcoin trên sàn. Một số sàn thu một chút phí cho việc này. Chọn nếu bạn nghĩ giá Bitcoin sẽ khá ổn định.</string>
+    <string name="action_hold">GIỮ.\n Không bán số bitcoin bạn nhận được. Chọn nếu bạn tin vào giá trị tương lai của Bitcoin.</string>
+
+    <string name="action_sign_in">Đăng nhập</string>
+    <string name="action_sign_in_short">Đăng nhập</string>
+    <string name="action_pay_short">Thu phí</string>
+    <string name="action_button_create_profile">Tạo</string>
+    <string name="action_button_cancel_bill">Hủy hóa đơn</string>
+    <string name="action_button_bill_received_owed">Thu phí</string>
+    <string name="action_button_bill_new_account">Hóa đơn mới</string>
+    <string name="action_button_bill_show_qrcode">Hiện mã QR</string>
+
+    <string name="notification_fraud_detection">Phát hiện gian lận</string>
+    <string name="notification_double_spend_attack">Phát hiện ra gian lận, tiền chưa nhận được</string>
+    <string name="notification_insufficient_payment">Số tiền nhận chưa đủ</string>
+
+    <string name="warning_insufficient_crypto">Số dư bitcoin không đủ để chuyển đổi thành tiền mặt. Số bitcoin sẽ được chuyển đổi sau khi nhận được.</string>
+    <string name="warning_unknown_balance">Không rõ số dư bitcoin. Số bitcoin sẽ được chuyển đổi sau khi nhận được.</string>
+    <string name="warning_unknown_price">Không rõ tỉ giá. Số bitcoin sẽ được chuyển đổi sau khi nhận được.</string>
+
+    <string name="error_invalid_email">Đia chỉ email sai</string>
+    <string name="error_invalid_password">Mật khẩu quá ngắn</string>
+    <string name="error_passwords_dont_match">Mật khẩu không trùng khớp</string>
+    <string name="error_incorrect_password">Sai đăng nhập</string>
+    <string name="error_no_connectivity">Không kết nối được tới sàn</string>
+    <string name="error_no_response">Sàn giao dịch không trả lời</string>
+    <string name="error_needs_2fa">Mã xác nhận</string>
+    <string name="error_incorrect_2fa">Mẫ xác nhận sai</string>
+    <string name="error_unauthorized">Không được cho phép</string>
+    <string name="error_create_deposit">Lỗi khi tạo lệnh nạp</string>
+    <string name="error_field_required">Trường bắt buộc</string>
+    <string name="error_insufficient_funds">Không đủ tiền</string>
+    <string name="error_no_buyers">Không có người mua\nKhông thể chuyển đổi thành Bitcoin</string>
+    <string name="error_not_enough_buyers">Không đủ người mua\nLượng tiền đã được chuyển đổi một phần sang tiền mặt.</string>
+    <string name="error_during_conversion">Lỗi khi chuyển đổi Bitcoin sang tiền mặt</string>
+    <string name="error_unknown">Đã có lỗi</string>
+    <string name="error_internal_1">Lỗi bên trong 1</string>
+    <string name="error_no_browser">Không có ứng dụng nào xử lý được yêu cầu này. Vui lòng cài đặt trình duyệt web.</string>
+
+    <string name="label_bill_cry">Hóa đơn (BTC)</string>
+    <string name="label_bill_fiat">Hóa đơn (VND)</string>
+    <string name="label_bill_receiving">Đang nhận</string>
+    <string name="label_bill_received">Đã nhận</string>
+    <string name="label_bill_owed">Hết hạn</string>
+    <string name="label_bill_payments">Đã nhận được thanh toán</string>
+
+    <string name="label_login">Bạn đã có sẵn tài khoản. Hãy đăng nhập, sau đó bạn hãy đặt mật khẩu để đăng nhập với thiết bị này.</string>
+    <string name="label_create_account_help">Tạo một tài khoản trên những sàn này.</string>
+    <string name="label_create_profile_help">Tạo một hồ sờ để truy cập vào tài khoản trên sàn. Bạn chỉ truy cập được bằng thiết bị này.</string>
+    <string name="label_select_market_help">Chọn một sàn giao dịch\nđể mở tài khoản và hồ sơ.</string>
+
+</resources>

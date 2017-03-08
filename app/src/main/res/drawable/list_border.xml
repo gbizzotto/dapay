@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle" >
+            <!-- use this for transparent -->
+            <solid android:color="#00000000" />
+            <!-- use this for a background colour -->
+            <solid android:color="#FEF" />
+            <stroke android:width="1dip" android:color="#888" />
+        </shape>
+    </item>
+</layer-list>

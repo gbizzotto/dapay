@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_config_send"
+    android:gravity="center"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:parentActivityName=".ui.MainActivity"
+    tools:context="net.dapay.app.ConfigPayActivity"
+    android:background="#edf">
+
+    <ProgressBar
+        android:id="@+id/config_pay_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
+    <ScrollView
+        android:id="@+id/config_pay_form"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <RelativeLayout
+            android:id="@+id/fields_config_pay_form"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:text="@string/label_bill_fiat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/label_bill"
+                android:textSize="28sp"
+                android:layout_marginRight="5dp"
+                android:layout_alignBaseline="@+id/value_fiat"
+                android:layout_alignBottom="@+id/value_fiat"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="@string/cry"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btc_label"
+                android:textSize="20sp"
+                android:layout_marginRight="10dp"
+                android:layout_alignBaseline="@+id/value_btc"
+                android:layout_alignBottom="@+id/value_btc"
+                android:layout_alignParentStart="true"
+                android:layout_alignEnd="@+id/label_bill" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="33dp"
+                android:id="@+id/value_btc"
+                android:textSize="20sp"
+                android:text="@string/not_available"
+                android:layout_below="@+id/value_fiat"
+                android:layout_alignEnd="@+id/button_confirm"
+                android:background="#00ffff00"
+                android:layout_toEndOf="@+id/exchange_rate_label"
+                android:paddingLeft="5dp"
+                android:layout_alignStart="@+id/value_fiat" />
+
+            <TextView
+                android:text="@string/exchange_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/exchange_rate_label"
+                android:textSize="20sp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_below="@+id/btc_label"
+                android:layout_alignEnd="@+id/label_bill" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/exchange_rate"
+                android:textSize="20sp"
+                android:background="#00ffff00"
+                android:paddingLeft="5dp"
+                android:layout_below="@+id/value_btc"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/exchange_rate_label"
+                android:text="@string/not_available"
+                android:layout_marginBottom="27dp"
+                android:layout_alignStart="@+id/value_btc" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="text"
+                android:ems="10"
+                android:id="@+id/transaction_label"
+                android:hint="@string/label_optional"
+                android:imeActionId="@+id/pay"
+                android:imeActionLabel="@string/action_pay_short"
+                android:imeOptions="actionUnspecified"
+                android:background="@drawable/textlines"
+                android:padding="5dp"
+                android:maxLines="1"
+                android:layout_below="@+id/config_pay_warning"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true" />
+
+            <Button
+                android:text="@string/confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button_confirm"
+                android:layout_below="@+id/transaction_label"
+                android:layout_marginTop="15dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="@string/title_new_bill"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:id="@+id/label_title"
+                android:textSize="36sp" />
+
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:digits="0123456789.,"
+                android:ems="10"
+                android:id="@+id/value_fiat"
+                android:layout_marginTop="10dp"
+                android:hint="@string/fiat_hint"
+                android:width="130dp"
+                android:textSize="28sp"
+                android:background="@drawable/textlines"
+                android:padding="8dp"
+                android:maxLines="1"
+                android:nextFocusDown="@+id/transaction_label"
+                android:imeOptions="actionNext"
+                android:layout_below="@+id/label_action"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/label_bill" />
+
+            <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/config_pay_warning"
+                android:layout_below="@+id/exchange_rate"
+                android:layout_centerHorizontal="true"
+                android:textSize="18sp"
+                android:textColor="@android:color/holo_red_dark"
+                android:layout_marginBottom="12dp"
+                android:visibility="gone"
+                android:textAlignment="center" />
+
+            <TextView
+                android:text="action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/label_action"
+                android:layout_below="@+id/label_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

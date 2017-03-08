@@ -1,0 +1,98 @@
+<resources>
+    
+    <string name="app_name">DaPay (beta)</string>
+
+    <string name="cry">BTC</string>
+    <string name="exchange_rate">Rate</string>
+    <string name="unknown_exchange_rate">Exchange rate not available</string>
+    <string name="not_available">N/A</string>
+    <string name="fiat_hint">.0</string>
+    <string name="label_optional">Label (optional)</string>
+    <string name="confirm">Confirm</string>
+    <string name="balance">Balance</string>
+    <string name="profile">Profile</string>
+    <string name="cancelled">Cancel</string>
+    <string name="fraud">Fraud</string>
+    <string name="market">Brokerage firm (tap to open in browser)</string>
+
+    <string name="menu_logout">Switch profile</string>
+    <string name="menu_open_exchange">Open brokerage firm\'s website</string>
+
+    <string name="title_activity_login">Log in</string>
+    <string name="title_bill">Bill</string>
+    <string name="title_create_account">Create account</string>
+    <string name="title_create_profile">Create DaPay password</string>
+    <string name="title_select_profile">Select profile</string>
+    <string name="title_new_bill">New bill</string>
+
+    <string name="wait_connecting">Connecting</string>
+    <string name="wait_creating_profile">Creating profile</string>
+    <string name="wait_logging_in">Logging in</string>
+
+    <string name="prompt_no_profile">No profile</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_login">Log in</string>
+    <string name="prompt_preferences">Profile settings</string>
+    <string name="prompt_password">Password</string>
+    <string name="prompt_confirm_password">Confirm password</string>
+    <string name="prompt_2fa">Confirmation code</string>
+    <string name="prompt_profile_name">Profile name</string>
+    <string name="prompt_action">What do you want to do with your received bitcoins?</string>
+    <string name="prompt_create_profile">Create profile</string>
+    <string name="prompt_remove">Remove</string>
+
+    <string name="action_presell">PRESELL\nSell the bitcoins before you charge a bill to secure their value in your national currency. Check this option if you are worried about bitcoin\'s volatility.</string>
+    <string name="action_take">TAKE\nSell at the highest offer as soon as you receive the bitcoins. Check this option if you believe that bitcoin will loose value in the near future.</string>
+    <string name="action_make">MAKE\nPost a sell order. Some brokerages charge "makers" smaller fees. Check this option if you think bitcoin\'s price will stay fairly stable.</string>
+    <string name="action_hold">HOLD\nKeep your received bitcoins instead of exchanging them to your national currency. Check this option if you believe bitcoin\'s value will rise.</string>
+
+    <string name="action_sign_in">Log in</string>
+    <string name="action_sign_in_short">Log in</string>
+    <string name="action_pay_short">Charge</string>
+    <string name="action_button_create_profile">Create</string>
+    <string name="action_button_cancel_bill">Cancel bill</string>
+    <string name="action_button_bill_received_owed">Charge</string>
+    <string name="action_button_bill_new_account">New bill</string>
+    <string name="action_button_bill_show_qrcode">Show QRCode</string>
+
+    <string name="notification_fraud_detection">Fraud detection</string>
+    <string name="notification_double_spend_attack">Double spend suspicion, amount not received</string>
+    <string name="notification_insufficient_payment">The amount received is insufficient</string>
+
+    <string name="warning_insufficient_crypto">Your bitcoin balance is insufficient for conversion to your national currency. Your bitcoins will be converted once they are received.</string>
+    <string name="warning_unknown_balance">Couldn\'t load your bitcoin balance. Your bitcoins will be converted when received.</string>
+    <string name="warning_unknown_price">Couldn\'t load the exchange rate. Your bitcoins will be converted when received.</string>
+
+    <string name="error_invalid_email">Invalid Email</string>
+    <string name="error_invalid_password">Password too short</string>
+    <string name="error_passwords_dont_match">Passwords don\'t match</string>
+    <string name="error_incorrect_password">Invalid login or password</string>
+    <string name="error_no_connectivity">Could not connect to the brokerage system</string>
+    <string name="error_no_response">Brokerage system is not answering</string>
+    <string name="error_needs_2fa">Confirmation code</string>
+    <string name="error_incorrect_2fa">Invalid confirmation code</string>
+    <string name="error_unauthorized">Not authorized</string>
+    <string name="error_create_deposit">Error while creating deposit</string>
+    <string name="error_field_required">Mandatory field</string>
+    <string name="error_insufficient_funds">Insufficient funds</string>
+    <string name="error_no_buyers">No buyers\nUnable to convert the amount into bitcoins</string>
+    <string name="error_not_enough_buyers">Not enough buyers\nThe amount was partially converted to your national currency</string>
+    <string name="error_during_conversion">Error while converting bitcoins to your national currency</string>
+    <string name="error_unknown">Unexpected error</string>
+    <string name="error_internal_1">Internal error 1</string>
+    <string name="error_no_browser">Your device needs a web browser to handle this request. Please install one.</string>
+
+    <string name="label_bill_cry">Bill (BTC)</string>
+    <string name="label_bill_fiat">Bill ($)</string>
+    <string name="label_bill_receiving">Receiving</string>
+    <string name="label_bill_received">Received</string>
+    <string name="label_bill_owed">Due</string>
+    <string name="label_bill_payments">Payments received</string>
+
+    <string name="label_login">You already have an account with the selected brokerage firm. Please log in to your account. Once you log in you will be asked to create a unique password for this device with limited permissions to protect your data and funds.</string>
+    <string name="label_create_account_help">Create an account on the selected brokerage system.</string>
+    <string name="label_create_profile_help">Create a profile to access your account with your brokerage firm. It will be unique for this device.</string>
+    <string name="label_select_market_help">Choose a brokerage firm\nto create an account and profile</string>
+
+
+</resources>

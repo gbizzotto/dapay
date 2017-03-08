@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_bill"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:parentActivityName=".ui.MainActivity"
+    tools:context="net.dapay.app.BillActivity"
+    android:background="#edf">
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/content_bill"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/activity_list_vertical_margin"
+        android:paddingLeft="@dimen/activity_list_horizontal_margin"
+        android:paddingRight="@dimen/activity_list_horizontal_margin"
+        android:paddingTop="@dimen/activity_list_vertical_margin"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:context="net.dapay.app.BillActivity"
+        tools:showIn="@layout/activity_bill"
+        android:layout_below="@+id/label_payments_received"
+        android:background="@drawable/list_border">
+
+        <ListView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/deposit_list"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/amount_crypto"
+        android:textSize="22sp"
+        android:layout_below="@+id/label_cry"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/label_bill_payments"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/label_payments_received"
+        android:layout_below="@+id/button_show_qrcode"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="12dp" />
+
+    <Button
+        android:text="@string/action_button_bill_received_owed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/button_show_qrcode"
+        android:layout_below="@+id/amount_crypto_remaining"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="12dp" />
+
+    <TextView
+        android:text="@string/label_bill_received"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textview_recebido"
+        android:textAlignment="textEnd"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="@string/label_bill_owed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/textView9"
+        android:textAlignment="textEnd"
+        android:layout_below="@+id/amount_crypto_paid"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/amount_crypto_remaining"
+        android:textSize="22sp"
+        android:textAlignment="textEnd"
+        android:layout_below="@+id/textView9"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="@string/label_bill_fiat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/label_bill_fiat"
+        android:layout_below="@+id/amount_crypto"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="@string/label_bill_cry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/label_cry"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/amount_fiat"
+        android:textSize="22sp"
+        android:layout_below="@+id/label_bill_fiat"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/amount_crypto_paid"
+        android:textSize="22sp"
+        android:textAlignment="textEnd"
+        android:layout_below="@+id/textview_recebido"
+        android:layout_alignParentEnd="true" />
+
+    <TextView
+        android:text="TextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/bill_label_action" />
+
+</RelativeLayout>
