@@ -323,6 +323,7 @@ public class ConfigPayActivity extends ActionBarActivity implements Observer {
         double mCryptoAmount = 0.0d;
         String mWalletAddress = "";
         String mLabel = "";
+        Bill mBill;
 
         private final int ERRCODE_NONE                 = 0;
         private final int ERRCODE_UNKNOWN              = 1;
@@ -364,10 +365,6 @@ public class ConfigPayActivity extends ActionBarActivity implements Observer {
                 mErrCode = ERRCODE_CANT_CREATE_WALLET;
                 return false;
             }
-
-
-
-
 
             double fiat_amount = getFiatAmount();
             mCryptoAmount = 0.0d; // error by default
@@ -421,54 +418,20 @@ public class ConfigPayActivity extends ActionBarActivity implements Observer {
                 }
             }
 
-//            if (mCryptoAmount != 0.0) {
-//                if (Profile.currentProfile.action.equals(Bill.ACTION_PRE_SELL)) {
-//                    if (balance == -1.0) {
-//                        // We don't know if we have enough CRY, use maker price
-//                        action = Bill.ACTION_TAKE;
-//                    } else if (balance < mCryptoAmount) {
-//                        action = Bill.ACTION_TAKE;
-//                    } else {
-//                        // balance >= crypto_amount, sell the BTC now
-//                        IExchangeAPI.ErrorOrPayload<Double> maybe_crypto_amount = api.Convert(mFiatAmount);
-//                        if (maybe_crypto_amount.getErrCode() == IExchangeAPI.ErrorOrPayload.ERROR_NONE) {
-//                            mCryptoAmount = maybe_crypto_amount.getPayload().doubleValue();
-//                        } else if (maybe_crypto_amount.getErrCode() == IExchangeAPI.ErrorOrPayload.ERROR_INSUFFICIENT_FUNDS) {
-//                            mCryptoAmount = api.GetQuotation(mFiatAmount);
-//                            action = Bill.ACTION_TAKE;
-//                        } else if (maybe_crypto_amount.getErrCode() == IExchangeAPI.ErrorOrPayload.ERROR_NO_BUYER) {
-//                            mErrCode = ERRCODE_NO_BUYER;
-//                            return false;
-//                        } else if (maybe_crypto_amount.getErrCode() == IExchangeAPI.ErrorOrPayload.ERROR_NOT_ENOUGH_BUYERS) {
-//                            mCryptoAmount = api.GetQuotation(mFiatAmount);
-//                            mErrCode = ERRCODE_NOT_ENOUGH_BUYERS;
-//                            return false;
-//                        } else {
-//                            mErrCode = ERRCODE_PROBLEM_SELLING_FIAT;
-//                            return false;
-//                        }
-//                    }
-//                } else if (Profile.currentProfile.action.equals(Bill.ACTION_TAKE)) {
-//                    // We'll have the balance then
-//                    mCryptoAmount = quotation;
-//                }
-//            } else {
-//                if (Profile.currentProfile.action.equals(Bill.ACTION_PRE_SELL))
-//                    action = Bill.ACTION_MAKE;
-//            }
-
             // trunk to 8 decimal places
             BigDecimal bd = new BigDecimal(mCryptoAmount);
             bd = bd.setScale(8, BigDecimal.ROUND_HALF_DOWN);
             mCryptoAmount = bd.doubleValue();
 
-            Bill b = DBHelper.getInstance(getApplicationContext())
+            mBill = DBHelper.getInstance(getApplicationContext())
                     .insertBill(System.currentTimeMillis(),
                                 Profile.currentProfile.id, mWalletAddress, mFiatAmount, mCryptoAmount, mLabel, action);
-            if (b == null) {
+            if (mBill == null) {
                 mErrCode = ERRCODE_BILL_NOT_FOUND;
                 return false;
             }
+
+            PayActivity.GenerateQRCodes(ConfigPayActivity.this, mBill);
             return true;
         }
 

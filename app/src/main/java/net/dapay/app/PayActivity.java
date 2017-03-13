@@ -1,5 +1,6 @@
 package net.dapay.app;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
@@ -33,8 +34,8 @@ public class PayActivity extends AppCompatActivity implements Observer {
     String mWalletAddress;
     Bill mBill = null;
     boolean mZoomed = false;
-    Bitmap m_bmp_qrcode_big;
-    Bitmap m_bmp_qrcode_normal;
+    static Bitmap s_bmp_qrcode_big;
+    static Bitmap s_bmp_qrcode_normal;
     int mFrom = 0;
 
     public static final int FROM_CONFIG_PAY = 0;
@@ -78,8 +79,7 @@ public class PayActivity extends AppCompatActivity implements Observer {
         String str_exchange_rate = String.format("%.2f", exchange_rate);
         String str_amount_btc    = String.format("%.8f", amount_to_receive);
 
-        GenerateQRCodes();
-        ((ImageView) findViewById(R.id.wallet_qrcode)).setImageBitmap(m_bmp_qrcode_normal);
+        ((ImageView) findViewById(R.id.wallet_qrcode)).setImageBitmap(s_bmp_qrcode_normal);
 
         TextView wallet_address_tv = ((TextView) findViewById(R.id.wallet_address));
         wallet_address_tv.setText(
@@ -141,7 +141,7 @@ public class PayActivity extends AppCompatActivity implements Observer {
                 button_cancel.setVisibility((mZoomed || mBill.getAmountDepositedAndToBeDeposited() > 0)?View.GONE:View.VISIBLE);
 
                 ((ImageView) findViewById(R.id.wallet_qrcode)).setImageBitmap(
-                        PayActivity.this.mZoomed?m_bmp_qrcode_big:m_bmp_qrcode_normal);
+                        PayActivity.this.mZoomed? s_bmp_qrcode_big : s_bmp_qrcode_normal);
             }
         });
     }
@@ -172,26 +172,27 @@ public class PayActivity extends AppCompatActivity implements Observer {
         }
     }
 
-    public void GenerateQRCodes() {
+    public static void GenerateQRCodes(Activity activity, Bill bill) {
         QRCodeWriter writer = new QRCodeWriter();
         try {
             String label_urlencoded = "";
             try {
-                label_urlencoded = URLEncoder.encode(mBill.getLabel(), "utf-8");
+                label_urlencoded = URLEncoder.encode(bill.getLabel(), "utf-8");
             } catch (UnsupportedEncodingException e) {
             }
 
-            double amount_to_receive = mBill.getCryptoAmount() - mBill.getAmountDepositedAndToBeDeposited();
+            double amount_to_receive = bill.getCryptoAmount() - bill.getAmountDepositedAndToBeDeposited();
             String str_amount_btc = String.format("%.8f", amount_to_receive);
-            String qrcode_address = "bitcoin:" + mWalletAddress
+            String qrcode_address = "bitcoin:" + bill.getWalletID()
                     + "?amount=" + str_amount_btc.replace(',', '.')
-                    + ((mBill.getLabel()!=null && mBill.getLabel().length()!=0)?("&label=" + label_urlencoded):"");
+                    + ((bill.getLabel()!=null && bill.getLabel().length()!=0)?("&label=" + label_urlencoded):"");
 
-            RelativeLayout activity_layout = ((RelativeLayout) findViewById(R.id.activity_pay));
+            View activity_layout = View.inflate(activity, net.dapay.app.R.layout.activity_pay, null);
+//            RelativeLayout activity_layout = ((RelativeLayout) findViewById(R.id.activity_pay));
             int padding_left = activity_layout.getPaddingLeft();
-            int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, padding_left, getResources().getDisplayMetrics());
+            int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, padding_left, activity.getResources().getDisplayMetrics());
 
-            Display display = getWindowManager().getDefaultDisplay();
+            Display display = activity.getWindowManager().getDefaultDisplay();
             Point screen_size = new Point();
             display.getSize(screen_size);
 
@@ -201,10 +202,10 @@ public class PayActivity extends AppCompatActivity implements Observer {
             BitMatrix bitMatrix = writer.encode(qrcode_address, BarcodeFormat.QR_CODE, px_drawable_width, px_drawable_width);
             int width = bitMatrix.getWidth();
             int height = bitMatrix.getHeight();
-            m_bmp_qrcode_big = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            s_bmp_qrcode_big = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    m_bmp_qrcode_big.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                    s_bmp_qrcode_big.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
                 }
             }
 
@@ -212,10 +213,10 @@ public class PayActivity extends AppCompatActivity implements Observer {
             bitMatrix = writer.encode(qrcode_address, BarcodeFormat.QR_CODE, px_drawable_width*2/3, px_drawable_width*2/3);
             width = bitMatrix.getWidth();
             height = bitMatrix.getHeight();
-            m_bmp_qrcode_normal = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+            s_bmp_qrcode_normal = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    m_bmp_qrcode_normal.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
+                    s_bmp_qrcode_normal.setPixel(x, y, bitMatrix.get(x, y) ? Color.BLACK : Color.WHITE);
                 }
             }
 

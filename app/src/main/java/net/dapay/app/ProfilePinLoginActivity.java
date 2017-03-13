@@ -193,7 +193,15 @@ public class ProfilePinLoginActivity extends AppCompatActivity {
                                 Settings.Secure.getString(getApplicationContext().getContentResolver(), Settings.Secure.ANDROID_ID))
                                 .get(20, TimeUnit.SECONDS);
                 mLoginError = maybe_login.getErrCode();
-                return mLoginError == IExchangeAPI.ErrorOrPayload.ERROR_NONE;
+                if (mLoginError == IExchangeAPI.ErrorOrPayload.ERROR_NONE) {
+                    ExchangeAPI.GetCurrentAPI().ReadInstrumentDescription();
+                    ExchangeAPI.GetCurrentAPI().SignUpMarketData();
+                    ExchangeAPI.GetCurrentAPI().GetDepositUpdates(DBHelper.getInstance(getApplicationContext()));
+                    DBHelper.getInstance(getApplicationContext()).CacheBills(Profile.currentProfile);
+                    return true;
+                } else {
+                    return false;
+                }
             } catch (TimeoutException t) {
                 mLoginError = IExchangeAPI.ErrorOrPayload.ERROR_TIMEOUT;
             } catch (Throwable t) {
@@ -209,15 +217,8 @@ public class ProfilePinLoginActivity extends AppCompatActivity {
             EditText password_edit = (EditText) findViewById(R.id.pin_login_password);
 
             if (success) {
-                ExchangeAPI.GetCurrentAPI().ReadInstrumentDescription();
-                ExchangeAPI.GetCurrentAPI().SignUpMarketData();
-
                 Intent intent = new Intent(ProfilePinLoginActivity.this, MainActivity.class);
                 startActivity(intent);
-
-                ExchangeAPI.GetCurrentAPI().GetDepositUpdates(DBHelper.getInstance(getApplicationContext()));
-                DBHelper.getInstance(getApplicationContext()).CacheBills(Profile.currentProfile);
-
                 showProgress(false);
             } else {
                 showProgress(false);

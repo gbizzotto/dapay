@@ -85,6 +85,7 @@ public class BillActivity extends AppCompatActivity {
         button_qrcode.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {Intent intent = new Intent(BillActivity.this, PayActivity.class);
+                PayActivity.GenerateQRCodes(BillActivity.this, mBill);
                 Bundle bundle = new Bundle();
                 bundle.putString("wallet_address", mWalletAddress);
                 bundle.putInt("from", PayActivity.FROM_BILL);
