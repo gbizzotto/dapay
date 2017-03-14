@@ -37,6 +37,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
+import static net.dapay.app.Bill.ACTION_PRE_SELL;
+
 public class ProfilePinLoginActivity extends AppCompatActivity {
 
     private Broker mBroker;
@@ -195,7 +197,7 @@ public class ProfilePinLoginActivity extends AppCompatActivity {
                 mLoginError = maybe_login.getErrCode();
                 if (mLoginError == IExchangeAPI.ErrorOrPayload.ERROR_NONE) {
                     ExchangeAPI.GetCurrentAPI().ReadInstrumentDescription();
-                    ExchangeAPI.GetCurrentAPI().SignUpMarketData();
+                    ExchangeAPI.GetCurrentAPI().SignUpMarketData(Profile.currentProfile.action.equals(ACTION_PRE_SELL));
                     ExchangeAPI.GetCurrentAPI().GetDepositUpdates(DBHelper.getInstance(getApplicationContext()));
                     DBHelper.getInstance(getApplicationContext()).CacheBills(Profile.currentProfile);
                     return true;
@@ -212,67 +214,31 @@ public class ProfilePinLoginActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            IExchangeAPI api = ExchangeAPI.GetCurrentAPI();
-
             EditText password_edit = (EditText) findViewById(R.id.pin_login_password);
-
             if (success) {
                 Intent intent = new Intent(ProfilePinLoginActivity.this, MainActivity.class);
                 startActivity(intent);
                 showProgress(false);
             } else {
                 showProgress(false);
-                if (api == null) {
-                    //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ API is null");
-                } else if (mLoginError == IExchangeAPI.ErrorOrPayload.ERROR_NONE) {
-//                    m2faEdit.setText("");
-//                    m2faEdit.setVisibility(View.GONE);
+                if (mLoginError == IExchangeAPI.ErrorOrPayload.ERROR_NONE) {
                     password_edit.setError(getString(R.string.error_no_response));
                     password_edit.requestFocus();
                 } else {
-                    //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ LastError= " + mLoginError);
                     switch (mLoginError) {
-//                        case IExchangeAPI.ErrorOrPayload.ERROR_NEED_2FA:
-//                            m2faEdit = (EditText) findViewById(R.id._2fa);
-//                            if (m2faEdit.getVisibility() == View.VISIBLE) {
-//                                m2faEdit.setText("");
-//                                m2faEdit.setError(getString(R.string.error_incorrect_2fa));
-//                                m2faEdit.requestFocus();
-//                                System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ Wrong 2FA");
-//                            } else {
-//                                m2faEdit.setVisibility(View.VISIBLE);
-//                                m2faEdit.setError(getString(R.string.error_needs_2fa));
-//                                m2faEdit.setText("");
-//                                m2faEdit.requestFocus();
-//                                System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ 2FA required");
-//                            }
-//                            break;
                         case IExchangeAPI.ErrorOrPayload.ERROR_NOT_CONNECTED:
-//                            m2faEdit.setText("");
-//                            m2faEdit.setVisibility(View.GONE);
                             password_edit.setError(getString(R.string.error_no_connectivity));
                             password_edit.requestFocus();
                             break;
                         case IExchangeAPI.ErrorOrPayload.ERROR_LOGIN_PASS:
-//                            m2faEdit.setText("");
-//                            m2faEdit.setVisibility(View.GONE);
                             password_edit.setError(getString(R.string.error_incorrect_password));
                             password_edit.requestFocus();
                             break;
-//                        case IExchangeAPI.ErrorOrPayload.ERROR_INVALID_2FA:
-//                            m2faEdit.setText("");
-//                            m2faEdit.setError(getString(R.string.error_incorrect_2fa));
-//                            m2faEdit.requestFocus();
-//                            break;
                         case IExchangeAPI.ErrorOrPayload.ERROR_UNAUTHORIZED:
-//                            m2faEdit.setText("");
-//                            m2faEdit.setVisibility(View.GONE);
                             password_edit.setError(getString(R.string.error_unauthorized));
                             password_edit.requestFocus();
                             break;
                         case IExchangeAPI.ErrorOrPayload.ERROR_UNKNOWN:
-//                            m2faEdit.setText("");
-//                            m2faEdit.setVisibility(View.GONE);
                             password_edit.setError(getString(R.string.error_unknown));
                             password_edit.requestFocus();
                             break;

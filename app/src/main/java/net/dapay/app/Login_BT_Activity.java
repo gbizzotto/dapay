@@ -51,14 +51,10 @@ import net.dapay.app.API.IExchangeAPI;
  */
 public class Login_BT_Activity extends AppCompatActivity implements LoaderCallbacks<Cursor> {
 
-    /**
-     * Id to identity READ_CONTACTS permission request.
-     */
+    // Id to identity READ_CONTACTS permission request.
     private static final int REQUEST_READ_CONTACTS = 0;
 
-    /**
-     * Keep track of the login task to ensure we can cancel it if requested.
-     */
+    // Keep track of the login task to ensure we can cancel it if requested.
     private UserLoginTask mAuthTask = null;
 
     // UI references.
@@ -93,7 +89,6 @@ public class Login_BT_Activity extends AppCompatActivity implements LoaderCallba
                 // TODO
             }
         }
-
 
         // Init singleton WITH CONTEXT
         Notifier.getInstance(getApplicationContext(), this);
@@ -373,8 +368,6 @@ public class Login_BT_Activity extends AppCompatActivity implements LoaderCallba
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
 
-            IExchangeAPI api = ExchangeAPI.GetCurrentAPI();
-
             if (success) {
                 DBHelper.getInstance(getApplicationContext());
                 Intent intent = new Intent(Login_BT_Activity.this, mBroker.GetNextActivity(Login_BT_Activity.class));
@@ -385,15 +378,12 @@ public class Login_BT_Activity extends AppCompatActivity implements LoaderCallba
                 showProgress(false);
             } else {
                 showProgress(false);
-                if (api == null) {
-                    //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ API is null");
-                } else if (mLoginError == IExchangeAPI.ErrorOrPayload.ERROR_NONE) {
+                if (mLoginError == IExchangeAPI.ErrorOrPayload.ERROR_NONE) {
                     m2faEdit.setText("");
                     m2faEdit.setVisibility(View.GONE);
                     mPasswordEdit.setError(getString(R.string.error_no_response));
                     mPasswordEdit.requestFocus();
                 } else {
-                    //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ LastError= " + mLoginError);
                     switch (mLoginError) {
                         case IExchangeAPI.ErrorOrPayload.ERROR_NEED_2FA:
                             m2faEdit = (EditText) findViewById(R.id._2fa);
@@ -401,13 +391,11 @@ public class Login_BT_Activity extends AppCompatActivity implements LoaderCallba
                                 m2faEdit.setText("");
                                 m2faEdit.setError(getString(R.string.error_incorrect_2fa));
                                 m2faEdit.requestFocus();
-                                //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ Wrong 2FA");
                             } else {
                                 m2faEdit.setVisibility(View.VISIBLE);
                                 m2faEdit.setError(getString(R.string.error_needs_2fa));
                                 m2faEdit.setText("");
                                 m2faEdit.requestFocus();
-                                //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ 2FA required");
                             }
                             break;
                         case IExchangeAPI.ErrorOrPayload.ERROR_NOT_CONNECTED:

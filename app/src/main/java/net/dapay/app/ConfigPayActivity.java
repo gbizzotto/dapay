@@ -425,7 +425,8 @@ public class ConfigPayActivity extends ActionBarActivity implements Observer {
 
             mBill = DBHelper.getInstance(getApplicationContext())
                     .insertBill(System.currentTimeMillis(),
-                                Profile.currentProfile.id, mWalletAddress, mFiatAmount, mCryptoAmount, mLabel, action);
+                                Profile.currentProfile.id, mWalletAddress, mFiatAmount, mCryptoAmount, mLabel,
+                                action, action.equals(Bill.ACTION_PRE_SELL) || action.equals(Bill.ACTION_HOLD));
             if (mBill == null) {
                 mErrCode = ERRCODE_BILL_NOT_FOUND;
                 return false;

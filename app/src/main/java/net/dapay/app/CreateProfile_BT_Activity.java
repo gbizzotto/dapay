@@ -230,8 +230,6 @@ public class CreateProfile_BT_Activity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            IExchangeAPI api = ExchangeAPI.GetCurrentAPI();
-
             if (success) {
                 mMaybeProfile.getPayload().broker_id = mBroker.getID();
                 DBHelper.getInstance(getApplicationContext()).AddProfile(mMaybeProfile.getPayload());
@@ -242,63 +240,28 @@ public class CreateProfile_BT_Activity extends AppCompatActivity {
             } else {
                 int login_error = mMaybeProfile.getErrCode();
                 showProgress(false);
-                if (api == null) {
-                    //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ API is null");
-                } else {
-                    //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ LastError= " + login_error);
-                    switch (login_error) {
-                        case IExchangeAPI.ErrorOrPayload.ERROR_NONE:
-                            System.out.println("Should not happen");
-//                    m2faEdit.setText("");
-//                    m2faEdit.setVisibility(View.GONE);
-                            mPasswordEdit.setError(getString(R.string.error_no_response));
-                            mPasswordEdit.requestFocus();
-                            break;
-//                        case IExchangeAPI.ErrorOrPayload.ERROR_NEED_2FA:
-//                            m2faEdit = (EditText) findViewById(R.id._2fa);
-//                            if (m2faEdit.getVisibility() == View.VISIBLE) {
-//                                m2faEdit.setText("");
-//                                m2faEdit.setError(getString(R.string.error_incorrect_2fa));
-//                                m2faEdit.requestFocus();
-//                                System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ Wrong 2FA");
-//                            } else {
-//                                m2faEdit.setVisibility(View.VISIBLE);
-//                                m2faEdit.setError(getString(R.string.error_needs_2fa));
-//                                m2faEdit.setText("");
-//                                m2faEdit.requestFocus();
-//                                System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ 2FA required");
-//                            }
-//                            break;
-                        case IExchangeAPI.ErrorOrPayload.ERROR_NOT_CONNECTED:
-//                            m2faEdit.setText("");
-//                            m2faEdit.setVisibility(View.GONE);
-                            mPasswordEdit.setError(getString(R.string.error_no_connectivity));
-                            mPasswordEdit.requestFocus();
-                            break;
-                        case IExchangeAPI.ErrorOrPayload.ERROR_LOGIN_PASS:
-//                            m2faEdit.setText("");
-//                            m2faEdit.setVisibility(View.GONE);
-                            mPasswordEdit.setError(getString(R.string.error_incorrect_password));
-                            mPasswordEdit.requestFocus();
-                            break;
-//                        case IExchangeAPI.ErrorOrPayload.ERROR_INVALID_2FA:
-//                            m2faEdit.setText("");
-//                            m2faEdit.setError(getString(R.string.error_incorrect_2fa));
-//                            m2faEdit.requestFocus();
-//                            break;
-                        case IExchangeAPI.ErrorOrPayload.ERROR_UNAUTHORIZED:
-//                            m2faEdit.setText("");
-//                            m2faEdit.setVisibility(View.GONE);
-                            mPasswordEdit.setError(getString(R.string.error_unauthorized));
-                            mPasswordEdit.requestFocus();
-                            break;
-                        case IExchangeAPI.ErrorOrPayload.ERROR_UNKNOWN:
-//                            m2faEdit.setText("");
-//                            m2faEdit.setVisibility(View.GONE);
-                            mPasswordEdit.setError(getString(R.string.error_unknown));
-                            mPasswordEdit.requestFocus();
-                            break;
-                    }
+                switch (login_error) {
+                    case IExchangeAPI.ErrorOrPayload.ERROR_NONE:
+                        System.out.println("Should not happen");
+                        mPasswordEdit.setError(getString(R.string.error_no_response));
+                        mPasswordEdit.requestFocus();
+                        break;
+                    case IExchangeAPI.ErrorOrPayload.ERROR_NOT_CONNECTED:
+                        mPasswordEdit.setError(getString(R.string.error_no_connectivity));
+                        mPasswordEdit.requestFocus();
+                        break;
+                    case IExchangeAPI.ErrorOrPayload.ERROR_LOGIN_PASS:
+                        mPasswordEdit.setError(getString(R.string.error_incorrect_password));
+                        mPasswordEdit.requestFocus();
+                        break;
+                    case IExchangeAPI.ErrorOrPayload.ERROR_UNAUTHORIZED:
+                        mPasswordEdit.setError(getString(R.string.error_unauthorized));
+                        mPasswordEdit.requestFocus();
+                        break;
+                    case IExchangeAPI.ErrorOrPayload.ERROR_UNKNOWN:
+                        mPasswordEdit.setError(getString(R.string.error_unknown));
+                        mPasswordEdit.requestFocus();
+                        break;
                 }
             }
         }

@@ -8,6 +8,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 
+import net.dapay.app.API.ExchangeAPI;
+import net.dapay.app.API.IExchangeAPI;
+
 public class ProfileSettingsActivity extends AppCompatActivity {
 
     boolean mCameFromMenu = false;
@@ -36,9 +39,13 @@ public class ProfileSettingsActivity extends AppCompatActivity {
         ((Button) findViewById(R.id.pref_button_ok)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (((RadioButton) findViewById(R.id.pref_radio_action_presell)).isChecked())
-                    Profile.currentProfile.action = Bill.ACTION_PRE_SELL;
-                else if (((RadioButton) findViewById(R.id.pref_radio_action_take)).isChecked())
+                if (((RadioButton) findViewById(R.id.pref_radio_action_presell)).isChecked()) {
+                    if (Profile.currentProfile.action != Bill.ACTION_PRE_SELL) {
+                        // Ask for full bids
+                        ExchangeAPI.GetCurrentAPI().SignUpMarketData(true);
+                        Profile.currentProfile.action = Bill.ACTION_PRE_SELL;
+                    }
+                } else if (((RadioButton) findViewById(R.id.pref_radio_action_take)).isChecked())
                     Profile.currentProfile.action = Bill.ACTION_TAKE;
                 else if (((RadioButton) findViewById(R.id.pref_radio_action_make)).isChecked())
                     Profile.currentProfile.action = Bill.ACTION_MAKE;

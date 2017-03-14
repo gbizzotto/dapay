@@ -720,7 +720,7 @@ public abstract class BlinktradeAPI implements IExchangeAPI {
                 "}");
     }
 
-    public void SignUpMarketData() {
+    public void SignUpMarketData(boolean full_bids) {
         // Cancel any other market data requests
         if (mBidsUpdateReqID != null)
             mConnection.sendJSONText("{\n" +
@@ -739,13 +739,15 @@ public abstract class BlinktradeAPI implements IExchangeAPI {
                     "\t\"FingerPrint\": \""+mFingerPrint+"\"\n" +
                     "}");
 
+        book_data.book_bids.clear();
+
         // Make a new market data request
         mBidsUpdateReqID = GetNextRequestID();
         mConnection.sendJSONText("{\n" +
                 "\t\"MsgType\": \"V\",\n" +
                 "\t\"MDReqID\": "+ mBidsUpdateReqID +",\n" +
                 "\t\"SubscriptionRequestType\": \"1\",\n" +
-                "\t\"MarketDepth\": 0,\n" +
+                "\t\"MarketDepth\": "+ (full_bids?100:1) +",\n" +
                 "\t\"MDUpdateType\": \"0\",\n" +
                 "\t\"MDEntryTypes\": [\n" +
                 "\t\t\"0\"\n" +

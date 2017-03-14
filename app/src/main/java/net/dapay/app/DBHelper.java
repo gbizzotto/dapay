@@ -69,6 +69,7 @@ public class DBHelper extends SQLiteOpenHelper implements Observer {
     public static final String BILL_COLUMN_NAME_CRYPTO_AMOUNT = "crypto_amount";
     public static final String BILL_COLUMN_NAME_LABEL         = "label";
     public static final String BILL_COLUMN_NAME_ACTION        = "action";
+    public static final String BILL_COLUMN_NAME_ACTION_DONE   = "action_done";
     public static final String BILL_COLUMN_NAME_ENABLED       = "enabled";
 
     public static final String TABLE_NAME_DEPOSIT = "deposits";
@@ -100,6 +101,7 @@ public class DBHelper extends SQLiteOpenHelper implements Observer {
                                 BILL_COLUMN_NAME_CRYPTO_AMOUNT + " REAL               ," +
                                 BILL_COLUMN_NAME_LABEL         + " TEXT               ," +
                                 BILL_COLUMN_NAME_ACTION        + " VARCHAR(10)        ," +
+                                BILL_COLUMN_NAME_ACTION_DONE   + " BOOLEAN            ," +
                                 BILL_COLUMN_NAME_ENABLED       + " BOOLEAN            );";
     private static final String SQL_CREATE_TABLE_DEPOSITS = "CREATE TABLE " + TABLE_NAME_DEPOSIT + " (" +
                                 DEPOSIT_COLUMN_NAME_INTERNAL_ID   + " INTEGER PRIMARY KEY," +
@@ -123,7 +125,7 @@ public class DBHelper extends SQLiteOpenHelper implements Observer {
     public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
     }
 
-    public Bill insertBill(long timestamp, long profile_id, String wallet_id, double fiat_amount, double crypto_amount, String label, String action)
+    public Bill insertBill(long timestamp, long profile_id, String wallet_id, double fiat_amount, double crypto_amount, String label, String action, boolean action_done)
     {
         if (mBillMap.containsKey(wallet_id))
             return null;
@@ -138,9 +140,10 @@ public class DBHelper extends SQLiteOpenHelper implements Observer {
         cv.put(BILL_COLUMN_NAME_CRYPTO_AMOUNT, crypto_amount);
         cv.put(BILL_COLUMN_NAME_LABEL,         label        );
         cv.put(BILL_COLUMN_NAME_ACTION,        action       );
+        cv.put(BILL_COLUMN_NAME_ACTION_DONE,   action_done  );
         cv.put(BILL_COLUMN_NAME_ENABLED,       true         );
 
-        Bill bill = new Bill(timestamp, profile_id, wallet_id, fiat_amount, crypto_amount, label, action);
+        Bill bill = new Bill(timestamp, profile_id, wallet_id, fiat_amount, crypto_amount, label, action, action_done);
         synchronized (mBillList) {
             int i;
             for (i=0 ; i<mBillList.size() ; i++) {
@@ -191,15 +194,6 @@ public class DBHelper extends SQLiteOpenHelper implements Observer {
     {
         SQLiteDatabase db = getWritableDatabase();
 
-//        insertBill(System.currentTimeMillis()        , "1HWCwGP1fFhvJYCNbkoUcSZS4HXwoCyjDa",  123.45, 0.05d      , "test 1");
-//        insertBill(System.currentTimeMillis() - 10000, "195rBJNAeDqusUEv9ARFxMvwHzdX7hvpnK",  250.45, 0.1d       , "test 2");
-//        insertBill(System.currentTimeMillis() - 20000, "1ENgqsAcMS4SLhst3W2EUZKiF1BbpzNMxd", 2500.45, 1.05d      , "test 3");
-//        insertBill(System.currentTimeMillis() - 30000, "1JKSdoWGAYjF8TAXasQQaMCJjKUFB1KP8e",   12.34, 0.005d     , "test 4");
-//        insertBill(System.currentTimeMillis() - 40000, "1HzafMC1CqeD9jX554oM2wpdqzhydMBGvj",   22.97, 0.00919014d, "test 5");
-//        insertBill(System.currentTimeMillis() - 50000, "19LGAfcbx8LxtbCQuFMByssMadbTmQ8BhY", 1234.5 , 0.5d       , "test 6");
-//        insertBill(System.currentTimeMillis() - 50000, "1Lqpd5vcwJa238RcF5fq1KABt9ARVtZhVM", 1234.5 , 0.949d     , "test 7");
-
-
         // Getting whatever we have from DB
         synchronized (mBillList) {
             // Get Bills
@@ -219,7 +213,8 @@ public class DBHelper extends SQLiteOpenHelper implements Observer {
                                          cursor.getDouble(cursor.getColumnIndex(BILL_COLUMN_NAME_FIAT_AMOUNT  )),
                                          cursor.getDouble(cursor.getColumnIndex(BILL_COLUMN_NAME_CRYPTO_AMOUNT)),
                                          cursor.getString(cursor.getColumnIndex(BILL_COLUMN_NAME_LABEL        )),
-                                         cursor.getString(cursor.getColumnIndex(BILL_COLUMN_NAME_ACTION       )));
+                                         cursor.getString(cursor.getColumnIndex(BILL_COLUMN_NAME_ACTION       )),
+                                         cursor.getInt   (cursor.getColumnIndex(BILL_COLUMN_NAME_ACTION_DONE  ))==1);
                     mBillList.add(cursor.getPosition(), bill);
                     mBillMap.put(bill.getWalletID(), bill);
                 }
@@ -329,13 +324,15 @@ public class DBHelper extends SQLiteOpenHelper implements Observer {
         }
         if (bill.getStatus() == Bill.STATUS_CONFIRMED) {
             IExchangeAPI api = ExchangeAPI.GetCurrentAPI();
-            if (api != null) {
+            if (api != null &&  ! bill.getActionDone()) {
                 switch (bill.getAction()) {
                     case Bill.ACTION_TAKE:
                         api.TakeMarket(bill.getCryptoAmount());
+                        bill.setActionDone(true);
                         break;
                     case Bill.ACTION_MAKE:
                         api.MakeMarket(bill.getCryptoAmount());
+                        bill.setActionDone(true);
                         break;
                 }
             }

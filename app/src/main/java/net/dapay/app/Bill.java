@@ -53,13 +53,14 @@ public class Bill extends Observable
     private double cyrpto_amount;
     private String label;
     private String action;
+    private boolean action_done;
     private Hashtable<String, Deposit> deposits;
 
     public Bill() {}
-    public Bill(long _timestamp, long _profile_id, String _wallet_id, double _fiat_amount, double _crypto_amount, String _label, String _action) {
-        timestamp = _timestamp;
-        profile_id = _profile_id;
-        wallet_id = _wallet_id;
+    public Bill(long _timestamp, long _profile_id, String _wallet_id, double _fiat_amount, double _crypto_amount, String _label, String _action, boolean _action_done) {
+        timestamp   = _timestamp;
+        profile_id  = _profile_id;
+        wallet_id   = _wallet_id;
         fiat_amount = _fiat_amount;
 
         // trunk to 8 decimal places
@@ -67,12 +68,13 @@ public class Bill extends Observable
         bd = bd.setScale(8, BigDecimal.ROUND_HALF_DOWN);
         cyrpto_amount = bd.doubleValue();
 
-        label = _label;
-        action        = _action;
+        label       = _label;
+        action      = _action;
+        action_done = _action_done;
         deposits = new Hashtable<String, Deposit>();
     }
-    public Bill(long _id, long _timestamp, long _profile_id, String _wallet_id, double _fiat_amount, double _crypto_amount, String _label, String _action) {
-        this(_timestamp, _profile_id, _wallet_id, _fiat_amount, _crypto_amount, _label, _action);
+    public Bill(long _id, long _timestamp, long _profile_id, String _wallet_id, double _fiat_amount, double _crypto_amount, String _label, String _action, boolean _action_done) {
+        this(_timestamp, _profile_id, _wallet_id, _fiat_amount, _crypto_amount, _label, _action, _action_done);
         id = _id;
     }
 
@@ -108,6 +110,8 @@ public class Bill extends Observable
     }
     public String getAction() { return action; }
     public void setAction(String a) { action = a; }
+    public boolean getActionDone() { return action_done; }
+    public void setActionDone(boolean done) { action_done = done; }
     public Hashtable<String, Deposit> getDeposits() {
         return deposits;
     }

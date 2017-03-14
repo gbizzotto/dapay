@@ -91,7 +91,6 @@ public class DepositsListAdapter extends ArrayAdapter<Bill> implements Observer 
                 tv_status.setTextColor(Color.RED);
                 break;
         }
-        //rowView.setTag(new Integer(deposit.id));
         return rowView;
     }
 }

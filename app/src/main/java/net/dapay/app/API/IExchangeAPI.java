@@ -70,7 +70,7 @@ public interface IExchangeAPI {
     Future<ErrorOrPayload<Boolean>> Login(String login, String password, String _2FA, String fingerPrint);
     Future<ErrorOrPayload<Profile>> CreateProfile(String label, String password);
     void ReadInstrumentDescription();
-    void SignUpMarketData();
+    void SignUpMarketData(boolean full_bids);
     Fees GetFees();
     Future<ErrorOrPayload<Float>> GetCryptoBalance();
     Future<ErrorOrPayload<String>> GetDepositAddress();

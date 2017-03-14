@@ -284,8 +284,6 @@ public class Register_BT_Activity extends AppCompatActivity {
         protected void onPostExecute(final Boolean success) {
             mAuthTask = null;
 
-            IExchangeAPI api = ExchangeAPI.GetCurrentAPI();
-
             if (success) {
                 DBHelper.getInstance(getApplicationContext());
                 Intent intent = new Intent(Register_BT_Activity.this, mBroker.GetNextActivity(Register_BT_Activity.class));
@@ -296,15 +294,12 @@ public class Register_BT_Activity extends AppCompatActivity {
                 showProgress(false);
             } else {
                 showProgress(false);
-                if (api == null) {
-                    //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ API is null");
-                } else if (mLoginError == IExchangeAPI.ErrorOrPayload.ERROR_NONE) {
+                if (mLoginError == IExchangeAPI.ErrorOrPayload.ERROR_NONE) {
                     m2faEdit.setText("");
                     m2faEdit.setVisibility(View.GONE);
                     mPasswordEdit.setError(getString(R.string.error_no_response));
                     mPasswordEdit.requestFocus();
                 } else {
-                    //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ LastError= " + mLoginError);
                     switch (mLoginError) {
                         case IExchangeAPI.ErrorOrPayload.ERROR_NEED_2FA:
                             m2faEdit = (EditText) findViewById(R.id._2fa);
@@ -312,13 +307,11 @@ public class Register_BT_Activity extends AppCompatActivity {
                                 m2faEdit.setText("");
                                 m2faEdit.setError(getString(R.string.error_incorrect_2fa));
                                 m2faEdit.requestFocus();
-                                //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ Wrong 2FA");
                             } else {
                                 m2faEdit.setVisibility(View.VISIBLE);
                                 m2faEdit.setError(getString(R.string.error_needs_2fa));
                                 m2faEdit.setText("");
                                 m2faEdit.requestFocus();
-                                //System.out.println(new SimpleDateFormat("HH:mm:ss").format(new Date()) + " @ ============ 2FA required");
                             }
                             break;
                         case IExchangeAPI.ErrorOrPayload.ERROR_NOT_CONNECTED:

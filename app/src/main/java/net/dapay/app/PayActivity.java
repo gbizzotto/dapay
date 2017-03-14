@@ -188,7 +188,6 @@ public class PayActivity extends AppCompatActivity implements Observer {
                     + ((bill.getLabel()!=null && bill.getLabel().length()!=0)?("&label=" + label_urlencoded):"");
 
             View activity_layout = View.inflate(activity, net.dapay.app.R.layout.activity_pay, null);
-//            RelativeLayout activity_layout = ((RelativeLayout) findViewById(R.id.activity_pay));
             int padding_left = activity_layout.getPaddingLeft();
             int px = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_PX, padding_left, activity.getResources().getDisplayMetrics());
 
@@ -228,9 +227,7 @@ public class PayActivity extends AppCompatActivity implements Observer {
     public void update(Observable obs, Object obj) {
         if ( ! (obj instanceof Bill.Deposit))
             return;
-//        if (mBill.getStatus() != 0) {
-            DBHelper.getInstance(getApplicationContext()).GetDepositUpdates(this, false);
-            startActivity(new Intent(PayActivity.this, MainActivity.class));
-//        }
+        DBHelper.getInstance(getApplicationContext()).GetDepositUpdates(this, false);
+        startActivity(new Intent(PayActivity.this, MainActivity.class));
     }
 }
