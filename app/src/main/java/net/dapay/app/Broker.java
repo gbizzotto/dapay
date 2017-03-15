@@ -3,18 +3,26 @@ package net.dapay.app;
 import android.app.Activity;
 import android.support.v7.app.AppCompatActivity;
 
+import net.dapay.app.API.BlinktradeChileBit;
 import net.dapay.app.API.BlinktradeFoxbit;
 import net.dapay.app.API.BlinktradeLocalhostFromDebugCellphone;
 import net.dapay.app.API.BlinktradeLocalhostFromEmulator;
+import net.dapay.app.API.BlinktradeSurBitcoin;
 import net.dapay.app.API.BlinktradeTestnet;
 import net.dapay.app.API.BlinktradeTestnetFoxbit;
+import net.dapay.app.API.BlinktradeUrduBit;
+import net.dapay.app.API.BlinktradeVBTC;
 import net.dapay.app.API.IExchangeAPI;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static net.dapay.app.R.mipmap.ic_blinktrade;
+import static net.dapay.app.R.mipmap.ic_chilebit;
 import static net.dapay.app.R.mipmap.ic_foxbit;
+import static net.dapay.app.R.mipmap.ic_surbitcoin;
+import static net.dapay.app.R.mipmap.ic_urdubit;
+import static net.dapay.app.R.mipmap.ic_vbtc;
 
 /**
  * Created by gabriel on 12/29/16.
@@ -48,22 +56,23 @@ public class Broker {
         blinktrade_login_activities.add(CreateProfile_BT_Activity.class);
         blinktrade_login_activities.add(ProfileSettingsActivity.class);
         blinktrade_login_activities.add(SelectProfileActivity.class);
+
         Brokers.clear();
-        Brokers.add(new Broker(ic_blinktrade, "BlinkTrade testnet"       , "-"     , BlinktradeTestnet                    .class, blinktrade_register_activities, blinktrade_login_activities));
-        Brokers.add(new Broker(ic_blinktrade, "localhost from emulator"  , "-"     , BlinktradeLocalhostFromEmulator      .class, blinktrade_register_activities, blinktrade_login_activities));
-        Brokers.add(new Broker(ic_blinktrade, "localhost from real phone", "-"     , BlinktradeLocalhostFromDebugCellphone.class, blinktrade_register_activities, blinktrade_login_activities));
-        Brokers.add(new Broker(ic_foxbit    , "FoxBit"                   , "Brasil", BlinktradeFoxbit                     .class, blinktrade_register_activities, blinktrade_login_activities));
-        Brokers.add(new Broker(ic_foxbit    , "FoxBit Testnet"           , "Brasil", BlinktradeTestnetFoxbit              .class, blinktrade_register_activities, blinktrade_login_activities));
+        Brokers.add(new Broker(1, ic_blinktrade, "BlinkTrade testnet"       , "-"        , BlinktradeTestnet                    .class, blinktrade_register_activities, blinktrade_login_activities));
+//        Brokers.add(new Broker(2, ic_blinktrade, "localhost from emulator"  , "-"     , BlinktradeLocalhostFromEmulator      .class, blinktrade_register_activities, blinktrade_login_activities));
+//        Brokers.add(new Broker(3, ic_blinktrade, "localhost from real phone", "-"     , BlinktradeLocalhostFromDebugCellphone.class, blinktrade_register_activities, blinktrade_login_activities));
+        Brokers.add(new Broker(4, ic_foxbit    , "FoxBit"                   , "Brasil"   , BlinktradeFoxbit                     .class, blinktrade_register_activities, blinktrade_login_activities));
+//        Brokers.add(new Broker(5, ic_foxbit    , "FoxBit Testnet"           , "Brasil", BlinktradeTestnetFoxbit              .class, blinktrade_register_activities, blinktrade_login_activities));
+        Brokers.add(new Broker(6, ic_vbtc      , "VBTC"                     , "Việt Nam" , BlinktradeVBTC                       .class, blinktrade_register_activities, blinktrade_login_activities));
+        Brokers.add(new Broker(7, ic_surbitcoin, "SurBitcoin"               , "Venezuela", BlinktradeSurBitcoin                 .class, blinktrade_register_activities, blinktrade_login_activities));
+        Brokers.add(new Broker(8, ic_chilebit  , "ChileBit"                 , "Chile"    , BlinktradeChileBit                   .class, blinktrade_register_activities, blinktrade_login_activities));
+        Brokers.add(new Broker(9, ic_urdubit   , "UrduBit"                  , "Pākistān" , BlinktradeUrduBit                    .class, blinktrade_register_activities, blinktrade_login_activities));
     }
 
-    private Broker(int resource_id, String name, String country,
+    private Broker(int id, int resource_id, String name, String country,
                    Class<? extends IExchangeAPI> api_class,
                    List<Class<? extends Activity>> register_activities,
                    List<Class<? extends Activity>> login_activities) {
-        int id = 1;
-        for (Broker b: Brokers)
-            if (b.getID() >= id)
-                id = b.getID()+1;
         mID                 = id;
         mImageResourceID    = resource_id;
         mName               = name;

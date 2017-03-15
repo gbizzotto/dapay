@@ -34,7 +34,7 @@ public class BillActivity extends AppCompatActivity {
 
         if (ExchangeAPI.GetCurrentAPI() != null) {
             TextView label_fiat = ((TextView) findViewById(R.id.label_bill_fiat));
-            label_fiat.setText(label_fiat.getText().toString().replace("$", ExchangeAPI.GetCurrentAPI().GetCurrencyActualSymbol()));
+            label_fiat.setText(getString(R.string.label_bill_fiat).replace("$", ExchangeAPI.GetCurrentAPI().GetCurrencyActualSymbol()));
         }
 
         // get params

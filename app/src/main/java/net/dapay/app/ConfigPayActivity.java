@@ -50,7 +50,7 @@ public class ConfigPayActivity extends ActionBarActivity implements Observer {
 
         if (ExchangeAPI.GetCurrentAPI() != null) {
             TextView label_bill = ((TextView) findViewById(R.id.label_bill));
-            label_bill.setText(label_bill.getText().toString().replace("$", ExchangeAPI.GetCurrentAPI().GetCurrencyActualSymbol()));
+            label_bill.setText(getString(R.string.label_bill_fiat).replace("$", ExchangeAPI.GetCurrentAPI().GetCurrencyActualSymbol()));
         }
 
         mFiatEdit       = ((EditText) findViewById(R.id.value_fiat));
